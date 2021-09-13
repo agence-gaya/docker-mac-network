@@ -8,6 +8,7 @@ if [ ! -f "/local/$dest" ]; then
     rm -rf /etc/openvpn/*
     ovpn_genconfig -u tcp://localhost
     sed -i 's|^push|#push|' /etc/openvpn/openvpn.conf
+    echo 'push "comp-lzo no"' >> /etc/openvpn/openvpn.conf
     echo localhost | ovpn_initpki nopass
     easyrsa build-client-full host nopass
     ovpn_getclient host | sed '
